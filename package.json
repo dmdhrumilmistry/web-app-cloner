@@ -1,0 +1,17 @@
+{
+  "name": "react-app-cloner",
+  "version": "1.0.0",
+  "description": "Clones react web application",
+  "main": "src/index.js",
+  "scripts": {
+    "start":"node src/index.js"
+  },
+  "keywords": [
+    "react-app"
+  ],
+  "author": "dmdhrumilmistry",
+  "license": "MIT",
+  "dependencies": {
+    "source-map": "^0.7.4"
+  }
+}
