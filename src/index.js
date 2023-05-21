@@ -2,9 +2,6 @@ import sourceMap from 'source-map';
 import fs from 'fs';
 import path from 'path';
 import process from 'process';
-// const sourceMap = require('source-m/ap');
-// const fs = require('fs');
-// const path = require('path');
 import chalk from 'chalk';
 
 
