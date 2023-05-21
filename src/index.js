@@ -1,7 +1,11 @@
-const sourceMap = require('source-map');
-const fs = require('fs');
-const path = require('path');
-const { cwd } = require('process');
+import sourceMap from 'source-map';
+import fs from 'fs';
+import path from 'path';
+import process from 'process';
+// const sourceMap = require('source-m/ap');
+// const fs = require('fs');
+// const path = require('path');
+import chalk from 'chalk';
 
 
 async function fetchSourceMap(srcMapUrl) {
@@ -11,7 +15,7 @@ async function fetchSourceMap(srcMapUrl) {
         const srcMap = await res.json();
         return srcMap;
     }
-    console.error(`Failed to fetch Source Map returned HTTP status code ${res.status}`);
+    console.log(chalk.red.bold(`Failed to fetch Source Map returned HTTP status code ${res.status}`));
     const err = await res.text();
     return err;
 }
@@ -23,18 +27,18 @@ async function saveFile(filePath, content) {
         if (!fs.existsSync(filePath)) {
             await fs.mkdirSync(path.dirname(filePath), { recursive: true });
         }
-        
+
         // write data to file
         fs.writeFileSync(filePath, content);
 
     } catch (err) {
         facedError = true;
-        console.error(err);
+        console.log(chalk.red.bold(err));
     } finally {
         if (facedError) {
-            console.error(`faced Error while writing file: ${filePath}`)
+            console.log(chalk.red.bold(`[❌] faced Error while writing file: ${filePath}`));
         } else {
-            console.log(`wrote data to file: ${filePath}`);
+            console.log(chalk.greenBright(`[✓] ${filePath}`));
         }
     }
 }
@@ -49,7 +53,7 @@ async function saveSrcMapToDir(srcMap, outputDirPath) {
             if (content === null) {
                 const url = new URL(source, sourceMapURL)
                 content = await fetch(url).then(res => res.blob())
-                console.log(`${source} src content was not found so fetched content from ${url}`)
+                console.log(chalk.blue(`${source} src content was not found so fetched content from ${url}`));
             }
 
             // sanitize file path
@@ -64,18 +68,11 @@ async function saveSrcMapToDir(srcMap, outputDirPath) {
 
 async function cloneReactApp(srcMapUrl, outputDirPath) {
     const srcMap = await fetchSourceMap(srcMapUrl);
-    const status = await saveSrcMapToDir(srcMap, outputDirPath)
-    console.log(status);
-
-    // if (status === true) {
-    // console.log(`Source Code successfully saved to ${outputDirPath}`)
-    // } else {
-    // console.error(`Error occurred while saving source code to ${outputDirPath}`)
-    // }
+    const status = await saveSrcMapToDir(srcMap, outputDirPath);
 }
 
 // Google Dork: ext:map intext:react inurl:app.js.map
 const srcMapUrl = "https://iam.innogy.com/js/innogy/app.js.map";
-const outputDirPath = path.join(cwd(), 'temp');
+const outputDirPath = path.join(process.cwd(), 'temp');
 
 cloneReactApp(srcMapUrl, outputDirPath);

@@ -2,9 +2,10 @@
   "name": "web-app-cloner",
   "version": "1.0.0",
   "description": "Clones web application from webpack app map file",
+  "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "start":"node src/index.js",
+    "start": "node src/index.js"
   },
   "keywords": [
     "react-app",
@@ -17,6 +18,7 @@
   "author": "dmdhrumilmistry",
   "license": "MIT",
   "dependencies": {
+    "chalk": "^5.2.0",
     "source-map": "^0.7.4"
   }
 }
