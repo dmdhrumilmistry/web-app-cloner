@@ -156,3 +156,4 @@ dist
 # .pnp.*
 *tmp*
 *temp*
+*cloned-web-apps*
