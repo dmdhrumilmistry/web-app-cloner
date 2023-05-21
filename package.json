@@ -20,5 +20,8 @@
   "dependencies": {
     "chalk": "^5.2.0",
     "source-map": "^0.7.4"
+  },
+  "bin": {
+    "web-app-cloner": "src/index.js"
   }
 }
