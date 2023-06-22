@@ -1,6 +1,6 @@
 # web-app-cloner
 
-Web App cloner exploits misconfigured web apps with source to download complete source code for analysis and SAST. 
+Web App cloner exploits misconfigured web apps with source maps exposed to download complete website source code for SAST analysis. 
 
 ## Installation
 
